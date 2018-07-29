@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="js/fullpage/jquery.fullpage.min.css">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="js/jquery/jquery.js"></script>
+	<script src="js/fullpage/jquery.fullpage.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			var section2 = $('.section-2');
+			var section3 = $('.section-3');
+			var section4 = $('.section-4');
+			var section5 = $('.section-5');
+			var section6 = $('.section-6');
+			var section7 = $('.section-7');
+			var section8 = $('.section-8');
+			var hand = section8.find('.e3');
+			var again = section8.find('.e2');
+			var goon = $('#goon');
+
+			$('#fullpage').fullpage({
+				verticalCentered: false,
+				navigation: true,
+				scrollingSpeed: 1400,
+				onLeave: function (index, nextIndex, direction) {
+					// 第二屏动画
+					if (nextIndex == 2 && direction == 'down') {
+						// 搜索框从右向左滑出
+						section2.find('.e3').animate({
+							marginLeft: -111,
+							opacity: 1
+						}, 1200, function () {
+							// 搜索框中的文字渐显
+							section2.find('.e4').animate({
+								opacity: 1
+							}, 400, function () {
+								// 从右向左滑动的搜索框隐藏
+								section2.find('.e3').hide();
+								// 从下向上的搜索框显示并运动到右上角
+								section2.find('.e5').show().animate({
+									width: 160,
+									marginLeft: 118,
+									bottom: 448
+								}, 800);
+
+								// 沙发图片显示
+								section2.find('.e6').animate({
+									width: 441
+								}, 800);
+
+								// 文字显示
+								section2.find('.e2').animate({
+									opacity: 1
+								}, 800);
+
+							});
+						});
+					}
+
+					// 第三屏动画
+					if (nextIndex == 3 && direction == 'down') {
+						// 第二屏的沙发掉到第三屏
+						section2.find('.e7').show().animate({
+							bottom: -$(window).height() + 250,
+							width: 207,
+							marginLeft: -296
+						},1400);
+
+						// 白布显示 遮挡沙发
+						section2.find('.e8').show();
+
+						section3.find('.e3,.e5').delay(1000).animate({
+							opacity: 1
+						}, 1000);
+					}
+
+					// 第四屏动画
+					if (nextIndex == 4 && direction == 'down') {
+
+						// 将第二屏掉落到第三屏的沙发隐藏掉
+						section2.find('.e7').hide();
+						// 将第三屏隐藏的沙发显示出来并掉落到第四屏
+						section3.find('.shirt').show().animate({
+							bottom: -$(window).height() + 260,
+							marginLeft: -50
+						},1000, function () {
+							// 将掉落到第四屏的沙发隐藏掉
+							$(this).hide();
+							// 将第四屏中购物车中原本的沙发显示出来
+							section4.find('.e4 img').show();
+							// 将购物车移动到屏幕外部
+							section4.find('.e4').animate({
+								marginLeft: 800
+							},1000, function () {
+								// 文字变化
+								section4.find('.e3').animate({opacity:1},700);
+								// 显示收货地址
+								section4.find('.e6').animate({opacity:1},700);
+								section4.find('.e7').delay(1000).animate({opacity:1},700);
+							});
+						});
+					}
+
+					// 第五屏动画
+					if (nextIndex == 5 && direction == 'down') {
+
+						section5.find('.e3').animate({
+							marginTop: -200
+						}, 1000);
+						section5.find('.e4').show().animate({
+							marginBottom: -230
+						}, 1000);
+
+						section5.find('.e6').animate({
+							bottom: 0
+						}, 1000, function () {
+							section5.find('.e5').addClass('active');
+						});
+					}
+
+					// 第六屏动画
+					if (nextIndex == 6 && direction == 'down') {
+						// 第五屏的沙发掉落到第六屏幕
+						section5.find('.e4').animate({
+							width: 114,
+							bottom:-$(window).height() + 500,
+							marginBottom: 0,
+							marginLeft: -200
+						},1000, function () {
+							// 让沙发隐藏
+							$(this).hide();
+						});
+
+						// 让地六屏的沙发接住第五屏幕的盒子
+						section6.find('.e1').animate({
+							marginLeft: -210
+						},1000, function () {
+
+							// 让盒子掉落到运输车里面
+							$(this).animate({
+								bottom: 40
+							}, 800, function () {
+								// 背景开始运动
+								section6.animate({
+									backgroundPositionX: '-900px'
+								},2000, function() {
+
+									// 到货提示文字显示
+									section6.find('.e3').animate({opacity:1});
+
+									// 送货人从车中出来
+									section6.find('.e6').animate({
+										height: 305,
+										bottom: 110
+									},600, function () {
+
+										// 送货人送货
+										$(this).animate({
+											marginLeft: 70
+										},1000, function () {
+											// 请收货
+											section6.find('.e9').show();
+										});
+
+										// 接货人开门
+										section6.find('.e7').show();
+
+										// 接货人出现
+										section6.find('.e8').animate({
+											height: 297
+										},1000);
+
+									});
+
+								});
+
+								// 运输提示文字显示
+								section6.find('.e2').animate({opacity:1});
+
+								// 让门牌号显示
+								section6.find('.e5').show();
+
+							});
+						});
+					}
+
+					// 第七屏动画
+					if (nextIndex == 7 && direction == 'down') {
+
+						section7.find('.e1').delay(1000).animate({
+							width: 96
+						},1000);
+
+						section7.find('.e2').delay(1000).animate({
+							marginLeft: -284,
+							opacity:1
+						},1000);
+
+					}
+
+					if (nextIndex == 8) {
+						goon.hide();
+					}else{
+						goon.show();
+					}
+
+				}
+			});
+
+			section8.on('mousemove', function (e) {
+				var pageX = e.pageX;
+				var pageY = e.pageY;
+				var height = $(window).height() / 2;
+				pageY = pageY < height ? height: pageY;
+
+				hand.css('left',pageX);
+				hand.css('top',pageY);
+
+			});
+
+			again.on('click', function () {
+
+				$.fn.fullpage.moveTo(1);
+
+				$('.section *').attr('style','');
+
+			});
+
+			goon.on('click', function () {
+				$.fn.fullpage.moveSectionDown();
+			});
+
+		});
+	</script>
+</head>
+<body>
+	<a href="#" class="enter"></a>
+	<div class="goon" id="goon"></div>
+	<div id="fullpage">
+		<div class="section section-1">
+			<div class="e1"></div>
+			<div class="e2"></div>
+			<div class="e3"></div>
+		</div>
+		<div class="section section-2">
+			<div class="e1"></div>
+			<div class="e2"></div>
+			<div class="e3">
+				<div class="e4"></div>
+			</div>
+			<img class="e5" src="images/section-2-e5.png">
+			<img class="e6" src="images/section-2-e6.png">
+			<div class="e8"></div>
+			<img class="e7" src="images/section-2-e7.png">
+			
+		</div>
+		<div class="section section-3">
+			<div class="main">
+				<div class="e2"></div>
+				<div class="e3"></div>
+				<div class="e4"></div>
+				<div class="e5"></div>
+			</div>
+			<div class="shirt"></div>
+		</div>
+		<div class="section section-4">
+			<div class="e1"></div>
+			<div class="e2"></div>
+			<div class="e3"></div>
+			<div class="e4">
+				<img src="images/section-4-e4.png">
+				<img src="images/section-4-e5.png">
+			</div>
+			<div class="e6">
+				<div class="e7"></div>
+			</div>
+		</div>
+		<div class="section section-5">
+			<div class="e1"></div>
+			<div class="e2"></div>
+			<div class="e3"></div>
+			<img class="e4" src="images/section-4-e5.png">
+			<div class="wraper">
+				<div class="e5"></div>
+				<div class="e6"></div>
+			</div>
+		</div>
+		<div class="section section-6">
+			<div class="e1"></div>
+			<div class="e2"></div>
+			<div class="e3"></div>
+			<div class="e4"></div>
+			<div class="e5"></div>
+			<img class="e6" src="images/section-6-e6.png">
+			<div class="e7"></div>
+			<img class="e8" src="images/section-6-e8.png">
+			<div class="e9"></div>
+		</div>
+		<div class="section section-7">
+			<div class="e1"></div>
+			<div class="e2"></div>
+		</div>
+		<div class="section section-8">
+			<div class="e1"></div>
+			<div class="e2"></div>
+			<div class="e3"></div>
+		</div>
+	</div>
+</body>
+</html>
